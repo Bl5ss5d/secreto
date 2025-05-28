@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>16/3/2025</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffe6f0, #fff);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+    }
+    .ventana {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      border: 3px solid pink;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,105,180,0.7);
+      max-width: 500px;
+      z-index: 2000;
+      animation: aparecer 1s ease;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    .cerrar {
+      background: #ff69b4;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 25px; height: 25px;
+      position: absolute;
+      top: 5px; right: 5px;
+      cursor: pointer;
+    }
+    .emoji {
+      position: absolute;
+      font-size: 50px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .emoji:hover {
+      transform: scale(1.3);
+    }
+    #corazones {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1500;
+    }
+    #corazones span {
+      position: absolute;
+      font-size: 30px;
+      animation: flotar 5s linear infinite;
+      color: red;
+    }
+    @keyframes flotar {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-10vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="pantallaInicio" class="ventana">
+  <button class="cerrar" onclick="cerrarVentana('pantallaInicio')">X</button>
+  <h2>🔒 Hello Kitty te pide una contraseña</h2>
+  <img src="kitty_inicio.png" width="100"><br>
+  <input type="text" id="passwordInput" placeholder="Introduce la contraseña..." style="padding:10px; font-size:16px;"><br>
+  <button onclick="entrar()" style="padding:10px 20px; margin-top:10px; font-size:16px;">Entrar</button>
+  <p id="mensajeError" style="color:red;"></p>
+</div>
+
+<div id="pistas" class="ventana" style="display:none;">
+  <button class="cerrar" onclick="cerrarVentana('pistas')">X</button>
+  <h3>💬 Hello Kitty te da pistas</h3>
+  <img src="kitty_pistas.png" width="100"><br>
+  <button onclick="darPista()">Pedir pista</button>
+  <p id="textoPista"></p>
+</div>
+
+<div id="cartaSecreta" class="ventana" style="display:none;">
+  <button class="cerrar" onclick="cerrarVentana('cartaSecreta')">X</button>
+  <h2>💌 Carta de Amor 💌</h2>
+
+<p>Mi amor,
+
+<p>Desde el momento en que llegaste a mi vida, supe que nada volvería a ser igual. Eres bajita, sí, pero para mí, eres enorme en todo lo que importa: en dulzura, en bondad, en ternura. Tus ojos, tan bonitos y llenos de luz, son mi refugio, mi paz. Tu carita linda es lo primero que quiero ver al despertar y lo último al cerrar los ojos.
+
+<p>Cada palabra tuya, cada gesto, cada risa, me hacen sentirme especial, querido, necesario. Me haces querer ser mejor, me haces soñar despierto, me haces creer que el amor verdadero existe.
+
+<p>Eres mi persona favorita.
+Eres mi alegría diaria, la calma en mis tormentas, la inspiración detrás de cada suspiro.
+
+<p>Te escribo esta carta para recordarte cuánto significas para mí:
+🌹 Significas los días soleados y las noches estrelladas.
+🌷 Significas las sonrisas sinceras y los abrazos que curan.
+🌸 Significas un “te quiero” que no necesita palabras, porque se siente en el aire cuando estamos juntos.
+
+<p>“Te amo no por quien eres, sino por quien soy cuando estoy contigo.”
+— Gabriel García Márquez
+
+<p>A veces me pregunto cómo tuve la suerte de encontrarte, de coincidir contigo en esta vida. Cada detalle tuyo me enamora: cómo te emocionas por cosas pequeñas, cómo cuidas de quienes amas, cómo logras que incluso mis días grises brillen.
+
+<p>Quiero que sepas que estoy aquí para ti, siempre.
+Para abrazarte cuando tengas miedo, para reír contigo hasta que nos duela el estómago, para ser tu compañero en esta aventura que es la vida.
+
+<p>Poema para ti:
+Si fuera el aire, te rodearía suavemente.
+Si fuera el sol, te besaría cada mañana.
+Pero soy solo yo, un humano enamorado,
+soñando contigo en cada paso, en cada mirada.
+
+<p>Quiero seguir construyendo recuerdos a tu lado: canciones que sean nuestras, viajes, momentos simples que se vuelvan eternos.
+
+“El amor es la poesía de los sentidos.”
+— Honoré de Balzac
+
+<p>Gracias por ser tú.
+Gracias por enseñarme que amar es entregarse, confiar, reír, llorar, crecer juntos.
+Gracias por hacerme sentir que no estoy solo, que tengo un hogar en ti.
+
+<p>Nunca olvides esto: te quiero con todo mi corazón, con todo lo que soy y todo lo que seré.
+Eres mi sueño hecho realidad.
+Eres mi presente y mi futuro.
+Eres mi amor, mi reina, mi tesoro más preciado.
+
+<p>Con todo mi amor, siempre,
+💖 Tu niño que te adora 💖
+</div>
+
+<div id="botonPrivado" class="ventana" style="display:none;">
+  <button class="cerrar" onclick="cerrarVentana('botonPrivado')">X</button>
+  <h3>😡 ¡¿QUÉ HACES AQUÍ?!</h3>
+  <p>Hello Kitty: ¡Este es un chat privado entre Daniel y yo!</p>
+  <div style="background:#fce4ec; padding:10px; border-radius:10px; margin-top:10px; max-height:200px; overflow-y:auto;">
+    <p><strong>Daniel:</strong> Kitty, ¿me mandas una foto tuya linda? 😏</p>
+    <p><strong>Hello Kitty:</strong> Jajaja Daniel, qué travieso eres 🙈</p>
+    <p><strong>Daniel:</strong> Anda, Kitty, quiero verte en la bañera... 💦</p>
+    <p><strong>Hello Kitty:</strong> Bueno, pero que no se enteren... 😳</p>
+    <img src="kitty_banera.png" alt="Hello Kitty en la bañera" width="100%" style="margin-top:10px; border-radius:10px;">
+  </div>
+</div>
+
+<div id="corazones"></div>
+
+<button onclick="abrirVentana('pistas')" style="position:fixed; top:10px; left:10px;">💬 Pedir pista</button>
+<button onclick="abrirVentana('botonPrivado')" style="position:fixed; bottom:10px; right:10px;">🚫 Botón privado de Hello Kitty 🚫</button>
+
+<script>
+let pistaClicks = 0;
+let emojiSecreto = Math.floor(Math.random() * 50);
+
+function entrar() {
+  const pass = document.getElementById('passwordInput').value.trim();
+  if (pass === '16/3/2025' || pass === '16/03/2025') {
+    cerrarVentana('pantallaInicio');
+    mostrarEmojis();
+  } else {
+    document.getElementById('mensajeError').textContent = '😡 ¡Respuesta incorrecta!';
+  }
+}
+
+function mostrarEmojis() {
+  for (let i = 0; i < 50; i++) {
+    const emoji = document.createElement('div');
+    emoji.className = 'emoji';
+    emoji.textContent = ['🌷', '🌸', '🌺', '🌹', '💗', '❤️'][Math.floor(Math.random() * 6)] + ' ' + (i + 1);
+    emoji.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+    emoji.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+    emoji.addEventListener('click', () => {
+      if (i === emojiSecreto) {
+        mostrarCorazones();
+        abrirVentana('cartaSecreta');
+      } else {
+        alert('¡Emoji ' + (i + 1) + ' no es! Sigue buscando...');
+      }
+    });
+    document.body.appendChild(emoji);
+  }
+}
+
+function darPista() {
+  pistaClicks++;
+  const texto = document.getElementById('textoPista');
+  if (pistaClicks < 10) {
+    texto.textContent = 'Hello Kitty: Está lejos de las esquinas...';
+  } else if (pistaClicks < 20) {
+    texto.textContent = 'Hello Kitty: Busca por el centro de la pantalla.';
+  } else if (pistaClicks < 30) {
+    texto.textContent = 'Hello Kitty: ¡Te estás acercando!';
+  } else {
+    texto.textContent = 'Hello Kitty: ¡Vale ya! El número es ' + (emojiSecreto + 1);
+  }
+}
+
+function abrirVentana(id) {
+  document.getElementById(id).style.display = 'block';
+}
+
+function cerrarVentana(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+function mostrarCorazones() {
+  const container = document.getElementById('corazones');
+  container.innerHTML = '';
+  for (let i = 0; i < 50; i++) {
+    const heart = document.createElement('span');
+    heart.textContent = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    container.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>
